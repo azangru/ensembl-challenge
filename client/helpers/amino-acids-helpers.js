@@ -34,7 +34,7 @@ const singleLetterCodes = Object.keys(aminoAcidDictionary);
 
 const threeLetterCodes = values(aminoAcidDictionary);
 
-const isSingleLetterCode = (letter: string) => singleLetterCodes.includes(letter);
+const isSingleLetterCode = (letter: string) => singleLetterCodes.includes(letter.toUpperCase());
 
 const isThreeLetterCode = (string: string) => threeLetterCodes.includes(string);
 

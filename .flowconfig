@@ -12,5 +12,6 @@
 [options]
 module.name_mapper='^\(client\)\/\(.*\)$' -> '<PROJECT_ROOT>/\1/\2'
 module.name_mapper='^\(types\)\/\(.*\)$' -> '<PROJECT_ROOT>/\1/\2'
+module.name_mapper.extension='styl' -> '<PROJECT_ROOT>/types/webpack-assets.js.flow'
 
 [strict]

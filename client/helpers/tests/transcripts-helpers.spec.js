@@ -1,4 +1,4 @@
-import { selectTranslatableTranscripts } from 'client/helpers/transcripts-helpers';
+import { selectTranslatableTranscripts } from 'client/helpers/transcript-helpers';
 
 // sample response from the lookup/symbol/:species/:symbol endpoint (with the extended flag)
 import BRCA2 from 'test/fixtures/lookup-symbol-species-symbol-response';

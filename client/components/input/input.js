@@ -2,10 +2,11 @@
 import React, { PureComponent } from 'react';
 
 type Props = {
-  onChange: (SyntheticInputEvent<HTMLInputElement>, string) => any
+  updateStrategy?: Function,
+  onChange: string => any
 };
 
-type State = {
+export type State = {
   value: string
 };
 
@@ -15,12 +16,25 @@ class Input extends PureComponent<Props, State> {
     value: ''
   }
 
+  boundSetState = (...args: any) => this.setState(...args)
+
   onChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     e.preventDefault();
+    const { updateStrategy } = this.props;
 
     const value = e.target.value;
-    this.setState({ value });
-    this.props.onChange(e, value);
+
+    if (!value || !updateStrategy) {
+      this.setState({ value });
+      this.props.onChange(value);
+    } else {
+      updateStrategy({
+        value,
+        state: this.state,
+        setState: this.boundSetState,
+        onSetState: this.props.onChange
+      });
+    }
   }
 
   render() {
