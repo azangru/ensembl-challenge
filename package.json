@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --env.mode development --config ./webpack/webpack.config.babel.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tdd": "NODE_ENV=test jest --watchAll",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,9 @@
     "@babel/preset-flow": "7.0.0",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.0.0",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
+    "babel-jest": "23.6.0",
     "babel-loader": "8.0.4",
     "eslint": "5.6.1",
     "eslint-plugin-flowtype": "2.50.3",
@@ -37,7 +40,11 @@
     "webpack-merge": "4.1.4"
   },
   "dependencies": {
+    "ramda": "0.25.0",
     "react": "16.5.2",
-    "react-dom": "16.5.2"
+    "react-dom": "16.5.2",
+    "react-redux": "5.0.7",
+    "redux": "4.0.0",
+    "reselect": "4.0.0"
   }
 }

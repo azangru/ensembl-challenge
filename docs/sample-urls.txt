@@ -1,0 +1,2 @@
+http://rest.ensembl.org/lookup/symbol/homo_sapiens/BRCA2.json?;expand=1
+http://rest.ensembl.org/sequence/id/ENSG00000139618.json

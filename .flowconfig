@@ -1,0 +1,16 @@
+[ignore]
+.*\.spec\.js
+.*/webpack/.*
+.*/test/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='^\(client\)\/\(.*\)$' -> '<PROJECT_ROOT>/\1/\2'
+module.name_mapper='^\(types\)\/\(.*\)$' -> '<PROJECT_ROOT>/\1/\2'
+
+[strict]

@@ -1,7 +1,11 @@
+// @flow
+
 import React from 'react';
 
+import SearchContainer from 'client/containers/search-container';
+
 function App () {
-  return <h1>Hello!</h1>;
+  return <SearchContainer />;
 }
 
 export default App;
