@@ -4,11 +4,20 @@
 // other fields returned from the REST api will be ignored
 // (unfortunately, Ensembl doesn’t have a graphql api)
 
-type Translation = {
-  id: string
+export type Gene = {
+  Transcript: Transcript[],
+  object_type: "Gene"
 }
 
 export type Transcript = {
   id: string,
-  Translation?: Translation
+  Parent: string,
+  Translation?: Translation,
+  object_type: "Transcript"
+}
+
+export type Translation = {
+  id: string,
+  Parent: string,
+  object_type: "Translation"
 }

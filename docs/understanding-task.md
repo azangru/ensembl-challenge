@@ -12,6 +12,8 @@ _*Doubt*: not sure whether the response from this endpoint includes (a) all know
 
 3. Iterate through the proteins in the response searching for the one with the requested amino acid in the requested position.
 
+_*Note:* geneticists number amino acids in the protein starting with 1 (just to make sure, checked the conventions at http://varnomen.hgvs.org/bg-material/numbering/). Computer scientists famously start counting from 0. This will need to be taken into account when searching for amino acids in the protein sequence._
+
 4. If such proteins are found, use their ids to select transcripts of this gene that contain the translations with such ids.
 
 5. Display these transcripts.

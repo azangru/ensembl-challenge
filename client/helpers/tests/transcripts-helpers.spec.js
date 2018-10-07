@@ -1,18 +1,24 @@
-import { selectTranslatableTranscripts } from 'client/helpers/transcript-helpers';
+import prop from 'ramda/src/prop';
 
-// sample response from the lookup/symbol/:species/:symbol endpoint (with the extended flag)
-import BRCA2 from 'test/fixtures/lookup-symbol-species-symbol-response';
+import { getTranscriptsByProteinIds } from 'client/helpers/transcript-helpers';
+
+import BRCA2 from 'test/fixtures/lookup-gene-expanded-response';
+import multipleProteinSequences from 'test/fixtures/sequence-protein-multiple-response';
 
 describe('transcripts helpers', () => {
 
-  describe('selectTranslatableTranscripts', () => {
+  describe('getTranscriptsByProteinIds', () => {
 
-    it('selects translatable transcripts from a gene', () => {
-      const expectedTranscriptIds = BRCA2.Transcript
-        .filter(({ Translation }) => Boolean(Translation))
-        .map(transcript => transcript.id);
+    it('selects gene transcripts by ids of their proteins', () => {
+      const proteinIds = multipleProteinSequences.map(prop('id'));
+      const expectedTranscriptIds = [
+        'ENST00000380152',
+        'ENST00000528762',
+        'ENST00000470094',
+        'ENST00000544455'
+      ];
 
-      expect(selectTranslatableTranscripts(BRCA2).map(transcript => transcript.id))
+      expect(getTranscriptsByProteinIds(BRCA2, proteinIds).map(prop('id')))
         .toEqual(expectedTranscriptIds);
     });
 

@@ -42,6 +42,7 @@ const isThreeLetterCode = (string: string) => threeLetterCodes.includes(string);
 const toSingleLetterCode = (string: string) => reverseAminoAcidDictionary[string];
 
 export {
+  aminoAcidDictionary,
   isSingleLetterCode,
   isThreeLetterCode,
   toSingleLetterCode
