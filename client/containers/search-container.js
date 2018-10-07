@@ -1,17 +1,39 @@
 // @flow
 
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+
+import {
+  searchByGene,
+  searchByProtein
+} from 'client/state/actions/search-actions';
 
 import SearchFields from 'client/components/search-fields';
 
 type Props = {
-  onSearch: Function
+  searchByGene: Function,
+  searchByProtein: Function
 }
 
-function Search(props: Props) {
-  return (
-    <SearchFields onSearch={props.onSearch} />
-  );
+class SearchContainer extends PureComponent<Props> {
+
+  componentDidCatch(error) {
+    console.log('error', error);
+  }
+
+  render() {
+    return (
+      <SearchFields
+      searchByGene={this.props.searchByGene}
+      searchByProtein={this.props.searchByProtein}
+      />
+    );
+  }
 }
 
-export default Search;
+const mapDispatchToProps = {
+  searchByGene,
+  searchByProtein
+};
+
+export default connect(null, mapDispatchToProps)(SearchContainer);

@@ -3,7 +3,9 @@ import React, { PureComponent } from 'react';
 
 type Props = {
   updateStrategy?: Function,
-  onChange: string => any
+  onChange: string => any,
+  onFocus: Function,
+  onBlur: Function
 };
 
 export type State = {
@@ -11,6 +13,11 @@ export type State = {
 };
 
 class Input extends PureComponent<Props, State> {
+
+  static defaultProps = {
+    onFocus: () => {},
+    onBlur: () => {}
+  }
 
   state = {
     value: ''
@@ -42,6 +49,8 @@ class Input extends PureComponent<Props, State> {
       <input
         value={this.state.value}
         onChange={this.onChange}
+        onFocus={this.props.onFocus}
+        onBlur={this.props.onBlur}
       />
     );
   }

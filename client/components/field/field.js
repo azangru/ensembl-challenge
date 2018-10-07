@@ -11,6 +11,8 @@ type Props = {
   name: string,
   updateStrategy?: Function,
   onChange: Function,
+  onFocus?: Function,
+  onBlur?: Function,
   error?: string
 }
 
@@ -21,6 +23,8 @@ function Field(props: Props) {
       <Input
         id={props.name}
         onChange={props.onChange}
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
         updateStrategy={props.updateStrategy}
       />
       { props.error &&
