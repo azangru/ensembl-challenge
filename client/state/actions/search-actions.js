@@ -20,9 +20,9 @@ type SearchByProteinPayload = {
 };
 
 export function searchByGene(payload: SearchByGenePayload) {
-  console.log('payload', payload);
   return {
-    type: SEARCH_START
+    type: SEARCH_START,
+    payload
   };
 }
 

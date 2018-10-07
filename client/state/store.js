@@ -1,17 +1,23 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createEpicMiddleware } from 'redux-observable';
+import rootEpic from 'client/state/epics';
 
 import * as reducers from './reducers';
 
+const epicMiddleware = createEpicMiddleware();
+
+const rootReducer = combineReducers({
+  ...reducers
+});
+
 export function configureStore() {
 
-  const rootReducer = combineReducers({
-    ...reducers
-  });
+  const store = createStore(
+    rootReducer,
+    applyMiddleware(epicMiddleware)
+  );
 
-  // const middlewares = [
-  //   thunk,
-  //   router5Middleware(router)
-  // ];
+  epicMiddleware.run(rootEpic);
 
-  return createStore(rootReducer);
+  return store;
 }
