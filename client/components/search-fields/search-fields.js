@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react';
 
 import PlainSearchFields from './plain-search-fields';
+import HGVSSearchField from './hgvs-search-field';
 
 type Props = {
   searchByGene: Function,
@@ -15,6 +16,7 @@ class SearchFields extends PureComponent<Props> {
     return (
       <div>
         <PlainSearchFields onSearch={this.props.searchByGene}/>
+        <HGVSSearchField onSearch={this.props.searchByProtein} />
       </div>
     );
   }
