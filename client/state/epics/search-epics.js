@@ -16,7 +16,6 @@ import {
 
 export const searchByGeneEpic = action$ => action$.pipe(
   ofType(SEARCH_START),
-  tap(action => console.log('action', action)),
   switchMap(({ payload }) =>
     http.get(`/lookup/symbol/homo_sapiens/${payload.gene}?expand=1`).pipe(
       mergeMap(gene =>
