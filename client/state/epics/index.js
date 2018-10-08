@@ -1,9 +1,11 @@
 import { combineEpics } from 'redux-observable';
 
 import {
-  searchByGeneEpic
+  searchByGeneEpic,
+  searchByProteinEpic
 } from 'client/state/epics/search-epics';
 
 export default combineEpics(
-  searchByGeneEpic
+  searchByGeneEpic,
+  searchByProteinEpic
 );

@@ -1,9 +1,7 @@
 // @flow
 
 import {
-  SEARCH_START,
-  SEARCH_SUCCESS,
-  SEARCH_ERROR
+  SEARCH_START
 } from 'client/state/constants/search-constants';
 
 type SearchByGenePayload = {
@@ -27,8 +25,8 @@ export function searchByGene(payload: SearchByGenePayload) {
 }
 
 export function searchByProtein(payload: SearchByProteinPayload) {
-  console.log('payload', payload);
   return {
-    type: SEARCH_START
+    type: SEARCH_START,
+    payload
   };
 }
