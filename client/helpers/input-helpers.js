@@ -1,7 +1,7 @@
 // @flow
 import last from 'ramda/src/last';
 
-import { isSingleLetterCode } from 'client/helpers/amino-acids-helpers';
+import { isSingleLetterCode } from 'client/helpers/amino-acid-helpers';
 
 import type { State } from 'client/components/input';
 

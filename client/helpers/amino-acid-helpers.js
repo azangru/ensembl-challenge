@@ -1,7 +1,7 @@
 // @flow
 
 import values from 'ramda/src/values';
-import invertObj from 'ramda/src/values';
+import invertObj from 'ramda/src/invertObj';
 
 // map between single-letter and 3-letter amino acid codes
 const aminoAcidDictionary = {

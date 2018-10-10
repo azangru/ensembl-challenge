@@ -1,11 +1,14 @@
 import { ofType } from 'redux-observable';
-import { of } from 'rxjs';
+import { of, iif } from 'rxjs';
 import { tap, switchMap, mergeMap, map, filter, catchError } from 'rxjs/operators';
 import prop from 'ramda/src/prop';
 
 import http from 'client/services/http';
 
-import { findSequencesWithAminoAcid } from 'client/helpers/sequence-helpers';
+import {
+  findSequencesWithAminoAcid,
+  hasAminoAcid3
+} from 'client/helpers/sequence-helpers';
 import { getTranscriptsByProteinIds } from 'client/helpers/transcript-helpers';
 
 import {
@@ -37,28 +40,15 @@ export const searchByGeneEpic = action$ => action$.pipe(
 
 export const searchByProteinEpic = action$ => action$.pipe(
   ofType(SEARCH_START),
-  tap(action => console.log('action', action)),
   filter(({ payload }) => payload.hasOwnProperty('sequenceId')),
-  switchMap(({ payload }) =>
-    // FIXME: check if valid by requesting the protein sequence
-
-    // request the protein
-    http.get(`/lookup/id/${payload.sequenceId}`).pipe(
-      tap(result => console.log('should check validity', result)),
-      mergeMap(protein =>
-        // request protein transcript
-        http.get(`/lookup/id/${protein.Parent}`).pipe(
-          mergeMap(transcript =>
-            http.get(`/lookup/id/${transcript.Parent}`).pipe(
-              mergeMap(gene =>
-                http.get(`/lookup/id/${gene.id}?expand=1`).pipe(
-                  map(geneData => ({ payload, geneData }))
-                )
-              )
-            )
-          )
-        )
-      )
+  switchMap(isProteinSequenceValid),
+  mergeMap(payload =>
+    iif(
+      () => payload.isValid,
+      fetchDataByProteinId(payload.sequenceId).pipe(
+        map(geneData => ({ payload, geneData }))
+      ),
+      of({ error: 'Amino acid not found' })
     )
   ),
   tap(result => console.log('result', result)),
@@ -66,6 +56,29 @@ export const searchByProteinEpic = action$ => action$.pipe(
   catchError(error => of({ type: SEARCH_ERROR, error })) // FIXME error
 );
 
+
+function isProteinSequenceValid({ payload }) {
+  return http.get(`/sequence/id/${payload.sequenceId}`).pipe(
+    map(sequence => ({
+      ...payload,
+      isValid: hasAminoAcid3(sequence, payload.initialAminoAcid, payload.position)
+    }))
+  );
+}
+
+function fetchDataByProteinId(proteinId) {
+  return http.get(`/lookup/id/${proteinId}`).pipe(
+    mergeMap(protein =>
+      // request transcript encoding the protein
+      http.get(`/lookup/id/${protein.Parent}`).pipe(
+        mergeMap(transcript =>
+          // request the gent encoding the transcript
+          http.get(`/lookup/id/${transcript.Parent}?expand=1`)
+        )
+      )
+    )
+  );
+}
 
 function processDataRetrievedByGene(data) {
   const {

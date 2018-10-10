@@ -4,7 +4,7 @@ import {
   findSequencesWithAminoAcid,
   hasAminoAcid
 } from 'client/helpers/sequence-helpers';
-import { aminoAcidDictionary } from 'client/helpers/amino-acids-helpers';
+import { aminoAcidDictionary } from 'client/helpers/amino-acid-helpers';
 
 import singleProteinSequence from 'test/fixtures/sequence-protein-single-response';
 import multipleProteinSequences from 'test/fixtures/sequence-protein-multiple-response';
