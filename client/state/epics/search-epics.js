@@ -19,7 +19,7 @@ import {
 
 export const searchByGeneEpic = action$ => action$.pipe(
   ofType(SEARCH_START),
-  filter(({ payload }) => payload.hasOwnProperty('gene')),
+  filter(({ meta }) => meta.searchBy === 'gene'),
   switchMap(({ payload }) =>
     http.get(`/lookup/symbol/homo_sapiens/${payload.gene}?expand=1`).pipe(
       mergeMap(gene =>
@@ -34,13 +34,20 @@ export const searchByGeneEpic = action$ => action$.pipe(
       )
     )
   ),
-  map((data) => ({ type: SEARCH_SUCCESS, payload: processDataRetrievedByGene(data) })),
+  map((data) => ({
+    type: SEARCH_SUCCESS,
+    payload: {
+      transcriptIds: processDataRetrievedByGene(data),
+      searchInput: {}
+    },
+    meta: { searchBy: 'gene' }
+  })),
   catchError(error => of({ type: SEARCH_ERROR, error })) // FIXME error
 );
 
 export const searchByProteinEpic = action$ => action$.pipe(
   ofType(SEARCH_START),
-  filter(({ payload }) => payload.hasOwnProperty('sequenceId')),
+  filter(({ meta }) => meta.searchBy === 'protein'),
   switchMap(isProteinSequenceValid),
   mergeMap(payload =>
     iif(

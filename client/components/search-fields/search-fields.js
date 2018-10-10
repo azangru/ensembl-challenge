@@ -15,7 +15,7 @@ class SearchFields extends PureComponent<Props> {
   render() {
     return (
       <div>
-        <PlainSearchFields onSearch={this.props.searchByGene}/>
+        <PlainSearchFields onSearch={this.props.searchByGene} />
         <HGVSSearchField onSearch={this.props.searchByProtein} />
       </div>
     );

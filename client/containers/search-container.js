@@ -1,12 +1,14 @@
 // @flow
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
   searchByGene,
   searchByProtein
 } from 'client/state/actions/search-actions';
+
+import SearchResultsContainer from 'client/containers/search-results-container';
 
 import SearchFields from 'client/components/search-fields';
 
@@ -23,10 +25,13 @@ class SearchContainer extends PureComponent<Props> {
 
   render() {
     return (
-      <SearchFields
-      searchByGene={this.props.searchByGene}
-      searchByProtein={this.props.searchByProtein}
-      />
+      <Fragment>
+        <SearchFields
+          searchByGene={this.props.searchByGene}
+          searchByProtein={this.props.searchByProtein}
+        />
+        <SearchResultsContainer />
+      </Fragment>
     );
   }
 }
