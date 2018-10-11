@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --env.mode development --config ./webpack/webpack.config.babel.js",
+    "prebuild": "rm -rf ./build",
     "build": "NODE_ENV=production webpack --env.mode production --config ./webpack/webpack.config.babel.js",
+    "serve-build": "http-server build -p 3000 --gzip",
     "tdd": "NODE_ENV=test jest --watchAll",
     "test": "NODE_ENV=test jest"
   },
@@ -27,6 +29,7 @@
     "babel-eslint": "10.0.1",
     "babel-jest": "23.6.0",
     "babel-loader": "8.0.4",
+    "compression-webpack-plugin": "2.0.0",
     "css-loader": "1.0.0",
     "eslint": "5.6.1",
     "eslint-plugin-flowtype": "2.50.3",
@@ -34,6 +37,7 @@
     "eslint-plugin-react": "7.11.1",
     "flow-bin": "0.82.0",
     "html-webpack-plugin": "3.2.0",
+    "http-server": "0.11.1",
     "jest": "23.6.0",
     "mini-css-extract-plugin": "0.4.3",
     "postcss-loader": "3.0.0",
