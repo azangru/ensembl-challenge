@@ -4,7 +4,8 @@ module.exports = {
     "node_modules",
     "<rootDir>",
   ],
+  setupTestFrameworkScriptFile: "<rootDir>/test/setup.js",
   moduleNameMapper: {
-    "\\.(styl|jpe?g|png|gif|svg|woff2?|ai|tiff?|md)$": "<rootDir>/test/fileMock.js"
+    "\\.(styl)$": "<rootDir>/test/file-mock.js"
   }
 };

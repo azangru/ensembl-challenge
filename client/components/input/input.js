@@ -2,6 +2,8 @@
 import React, { PureComponent } from 'react';
 
 type Props = {
+  id?: string,
+  name?: string,
   updateStrategy?: Function,
   onChange: string => any,
   onFocus: Function,
@@ -47,6 +49,8 @@ class Input extends PureComponent<Props, State> {
   render() {
     return (
       <input
+        id={this.props.id}
+        name={this.props.name}
         value={this.state.value}
         onChange={this.onChange}
         onFocus={this.props.onFocus}

@@ -22,6 +22,7 @@ function Field(props: Props) {
       <label className="field__label" htmlFor={props.name}>{props.label}</label>
       <Input
         id={props.name}
+        name={props.name}
         onChange={props.onChange}
         onFocus={props.onFocus}
         onBlur={props.onBlur}

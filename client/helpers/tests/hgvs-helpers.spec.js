@@ -13,8 +13,16 @@ describe('hgvs-helpers', () => {
     });
 
     it('returns false for a non-valid code', () => {
-      const invalidExample = 'ENSP00000419060.2:p.Val'; // ¯\_(ツ)_/¯ there are so many invalid possibilities
-      expect(isValidSubstitutionCode(invalidExample)).toBe(false);
+      const invalidExample1 = 'ENSP00000419060.2:p.Val'; // only first amino acid entered
+      const invalidExample2 = 'ENSP00000419060.2:p.Val600Gl'; // last amino acid incomplete
+      const invalidExample3 = 'ENSP00000419060.2:p.Val600Gll'; // last amino acid misspelled
+
+      // ¯\_(ツ)_/¯ there are so many invalid possibilities
+
+      [invalidExample1, invalidExample2, invalidExample3].forEach(example => {
+        expect(isValidSubstitutionCode(example)).toBe(false);
+      });
+
     });
 
   });
