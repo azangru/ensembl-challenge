@@ -9,7 +9,8 @@ import type {
 import {
   SEARCH_START,
   SEARCH_SUCCESS,
-  SEARCH_CANCEL
+  SEARCH_CANCEL,
+  SEARCH_ERROR
 } from 'client/state/constants/search-constants';
 
 export type State = {
@@ -37,15 +38,24 @@ export default function searchReducer(state: State = initialState, action: Actio
       };
 
     case SEARCH_SUCCESS:
+      console.log('action', action);
       return {
         ...initialState,
-        searchByGeneInput: action.meta.searchBy === 'gene' ? action.payload.searchInput : null,
-        searchByProteinInput: action.meta.searchBy === 'protein' ? action.payload.searchInput : null,
+        // searchByGeneInput: action.meta.searchBy === 'gene' ? action.payload.searchInput : null,
+        // searchByProteinInput: action.meta.searchBy === 'protein' ? action.payload.searchInput : null,
         transcriptIds: action.payload.transcriptIds
       };
 
     case SEARCH_CANCEL:
       return initialState;
+
+    case SEARCH_ERROR:
+      console.log('error action', action);
+      return {
+        ...state,
+        error: action.error,
+        loading: false
+      };
 
     default:
       return state;

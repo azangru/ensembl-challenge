@@ -41,9 +41,18 @@ const isThreeLetterCode = (string: string) => threeLetterCodes.includes(string);
 // assume the passed string is a valid three-letter code
 const toSingleLetterCode = (string: string) => reverseAminoAcidDictionary[string];
 
+const normalizeAminoAcidQuery = (string: string) => {
+  if (isThreeLetterCode(string)) {
+    return toSingleLetterCode(string);
+  } else {
+    return string;
+  }
+};
+
 export {
   aminoAcidDictionary,
   isSingleLetterCode,
   isThreeLetterCode,
-  toSingleLetterCode
+  toSingleLetterCode,
+  normalizeAminoAcidQuery
 };

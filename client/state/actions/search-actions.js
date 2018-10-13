@@ -3,7 +3,8 @@
 import {
   SEARCH_START,
   SEARCH_SUCCESS,
-  SEARCH_CANCEL
+  SEARCH_CANCEL,
+  SEARCH_ERROR
 } from 'client/state/constants/search-constants';
 
 export type SearchByGenePayload = {
@@ -49,12 +50,22 @@ type SearchByProteinSuccessAction = {
   meta: { searchBy: 'protein' }
 }
 
+type SearchCancelAction = {
+  type: typeof SEARCH_CANCEL
+};
+
+type SearchErrorAction = {
+  type: typeof SEARCH_ERROR,
+  error: string
+};
+
 export type Action =
   | SearchByGeneStartAction
   | SearchByProteinStartAction
   | SearchByGeneSuccessAction
   | SearchByProteinSuccessAction
-
+  | SearchCancelAction
+  | SearchErrorAction
 
 
 export function searchByGene(payload: SearchByGenePayload) {
