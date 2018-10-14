@@ -11,3 +11,5 @@ flow
 jest
 
 rxjs
+
+classnames

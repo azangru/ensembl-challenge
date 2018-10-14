@@ -1,0 +1,17 @@
+.search-fields__navigation
+  margin-bottom: 20px
+
+.search-fields__navigation-item
+  color: blue
+  border-bottom: 1px dashed blue
+
+  &:not(:last-child) {
+    margin-right: 1em
+  }
+
+  &:not(&_active)
+    cursor: pointer    
+
+  &_active
+    color: black
+    border: none

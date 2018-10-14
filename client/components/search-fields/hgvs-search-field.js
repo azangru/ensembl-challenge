@@ -25,7 +25,7 @@ class HGVSSearchField extends PureComponent<Props> {
   render() {
     return (
       <Field
-        label="Amino acid substitution in HGVS notation"
+        label="Substitution (in HGVS notation)"
         name="hgvs-substitution"
         onChange={this.handleChange}
       />

@@ -66,7 +66,10 @@ export function fetchDataByProteinId(payload) {
     ),
     map(([geneData, proteinSequences]) => {
       return {
-        searchInput: payload,
+        searchInput: {
+          ...payload,
+          gene: geneData.display_name
+        },
         transcriptIds: getTranscriptIds({
           aminoAcid: initialAminoAcid,
           aminoAcidPosition: position,
