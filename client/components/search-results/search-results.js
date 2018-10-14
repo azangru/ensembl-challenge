@@ -83,15 +83,21 @@ class SearchResults extends PureComponent<Props> {
   }
 
   renderCompletedMessage() {
+    let message;
     if (this.isSearchByGene()) {
-      return this.isEmptySearch() ?
+      message = this.isEmptySearch() ?
         this.getSearchByGeneEmptyMessage() :
         this.getSearchByGeneSuccessMessage();
     } else if (this.isSearchByProtein()) {
-      return this.isEmptySearch() ?
+      message =  this.isEmptySearch() ?
         this.getSearchByProteinEmptyMessage() :
         this.getSearchByProteinSuccessMessage();
     }
+    return (
+      <div className="search-results__message">
+        { message }
+      </div>
+    );
   }
 
   renderTranscriptsList() {

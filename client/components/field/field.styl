@@ -1,10 +1,14 @@
 .field
   margin-bottom: 1em
 
-.field__label
-  display: block
-  font-weight: bold
-  margin-bottom: 0.4em
+  &__label
+    display: block
+    font-weight: bold
+    margin-bottom: 0.4em
 
-.field__error
-  color: red
+  &__error
+    color: red
+
+// individual fields
+  & input[name="hgvs-substitution"]
+    min-width: 220px
