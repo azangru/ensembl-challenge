@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+.search-results {
+  margin-top: 2em;
+}
+.search-results__message {
+  margin-bottom: 0.6em;
+}
+.search-results__item {
+  display: block;
+  color: #00f;
+  margin-bottom: 0.2em;
+}
+.search-results__item:visited {
+  color: #00f;
+}
+.search-results__error {
+  color: #f00;
+}
+
+* {
+  box-sizing: border-box;
+}
+.field {
+  margin-bottom: 1em;
+}
+.field__label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4em;
+}
+.field__error {
+  color: #f00;
+}
+input[name="hgvs-substitution"] {
+  min-width: 220px;
+}
+
+* {
+  box-sizing: border-box;
+}
+.search-fields__navigation {
+  margin-bottom: 20px;
+}
+.search-fields__navigation-item {
+  color: #00f;
+  border-bottom: 1px dashed #00f;
+}
+.search-fields__navigation-item:not(:last-child) {
+  margin-right: 1em;
+}
+.search-fields__navigation-item:not(.search-fields__navigation-item_active) {
+  cursor: pointer;
+}
+.search-fields__navigation-item_active {
+  color: #000;
+  border: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+.layout {
+  max-width: 400px;
+  margin: auto;
+}
+
