@@ -42,6 +42,7 @@ export const searchByGeneEpic = action$ => action$.pipe(
 export const searchByProteinEpic = action$ => action$.pipe(
   ofType(SEARCH_START),
   filter(({ meta }) => meta.searchBy === 'protein'),
+  debounce(() => timer(500)),
   switchMap(action => api.isProteinSequenceValid(action.payload)),
   mergeMap(payload =>
     iif(
