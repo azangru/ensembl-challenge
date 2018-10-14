@@ -1,12 +1,17 @@
 This is a toy application built as a [technical challenge](docs/description.pdf) offered by Ensembl. The app searches for gene transcripts that encode proteins with a certain amino acid at a certain position using Ensembl REST API endpoints.
 
 To run the application locally:
+
 - install Node (e.g. the latest LTS)
 - cd into the project folder and run `npm install`
 - run `npm start` to start the app in development mode, or `npm run build && npm run serve-build` to start the app in production mode
 - open the browser and navigate to `localhost:3000` to see the app running
 
 _(the development build has webpack running in watch mode, and rebuilds every time the code changes; the production build is minified and gzipped and served locally by `http-server`)_
+
+To run the test suite:
+
+- run `npm test` (or `npm run tdd` to run the tests in the watch mode).
 
 Further relevant documentation:
 
