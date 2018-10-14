@@ -3,13 +3,9 @@ import { defer, of, throwError } from 'rxjs';
 import http from 'client/services/http';
 
 import {
-  SEARCH_START
-} from 'client/state/constants/search-constants';
-
-import {
   fetchDataByGeneName,
   fetchDataByProteinId
-} from 'client/state/epics/search-epics';
+} from 'client/services/api';
 
 import BRCA2 from 'test/fixtures/lookup-gene-expanded-response';
 import BRAF from 'test/fixtures/lookup-braf-expanded-response';
@@ -47,7 +43,7 @@ const mockGet = (query) => {
   }
 };
 
-describe('search epics', () => {
+describe('api service', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
