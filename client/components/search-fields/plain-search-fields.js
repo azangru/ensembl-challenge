@@ -10,7 +10,8 @@ import {
 } from 'client/helpers/input-helpers';
 
 type Props = {
-  onSearch: Function
+  onSearch: Function,
+  cancelSearch: Function
 }
 
 type State = {
@@ -28,23 +29,34 @@ class SearchFields extends PureComponent<Props, State> {
   }
 
   shouldSearch() {
-    return this.state.gene && this.state.aminoAcid && this.state.aminoAcidPosition;
+    return Boolean(this.state.gene && this.state.aminoAcid && this.state.aminoAcidPosition);
+  }
+
+  shouldCancel(prevState: State) {
+    const wasSearching = Boolean(prevState.gene && prevState.aminoAcid && prevState.aminoAcidPosition);
+    const shouldNotSearch = !this.state.gene || !this.state.aminoAcid || typeof this.state.aminoAcidPosition !== 'number';
+    return wasSearching && shouldNotSearch;
   }
 
   onGeneFieldChange = (gene: string) => {
-    this.setState({ gene }, () => this.handleChange());
+    const prevState = this.state;
+    this.setState({ gene }, () => this.handleChange(prevState));
   }
 
   onPositionFieldChange = (aminoAcidPosition: ?number) => {
-    this.setState({ aminoAcidPosition }, () => this.handleChange());
+    const prevState = this.state;
+    this.setState({ aminoAcidPosition }, () => this.handleChange(prevState));
   }
 
   onAminoAcidFieldChange = (aminoAcid: string) => {
-    this.setState({ aminoAcid }, () => this.handleChange());
+    const prevState = this.state;
+    this.setState({ aminoAcid }, () => this.handleChange(prevState));
   }
 
-  handleChange() {
-    if (this.shouldSearch()) {
+  handleChange(prevState: State) {
+    if (this.shouldCancel(prevState)) {
+      this.props.cancelSearch();
+    } else if (this.shouldSearch()) {
       this.props.onSearch(this.state);
     }
   }

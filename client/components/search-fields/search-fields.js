@@ -10,7 +10,8 @@ import './search-fields.styl';
 
 type Props = {
   searchByGene: Function,
-  searchByProtein: Function
+  searchByProtein: Function,
+  cancelSearch: Function
 };
 
 type View = 'gene' | 'protein';
@@ -26,6 +27,7 @@ class SearchFields extends PureComponent<Props, State> {
   }
 
   switchViewTo = (view: View) => () => {
+    this.props.cancelSearch();
     this.setState({ view });
   }
 
@@ -44,10 +46,16 @@ class SearchFields extends PureComponent<Props, State> {
         { this.renderTitle() }
         { this.renderNav() }
         { this.state.view === 'gene' &&
-          <PlainSearchFields onSearch={this.props.searchByGene} />
+          <PlainSearchFields
+            onSearch={this.props.searchByGene}
+            cancelSearch={this.props.cancelSearch}
+          />
         }
         { this.state.view === 'protein' &&
-          <HGVSSearchField onSearch={this.props.searchByProtein} />
+          <HGVSSearchField
+            onSearch={this.props.searchByProtein}
+            cancelSearch={this.props.cancelSearch}
+          />
         }
       </div>
     );

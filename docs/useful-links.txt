@@ -1,0 +1,9 @@
+These are notes to myself for future reference
+
+Examples of how to test epics for redux-observable:
+- an example using TestScheduler from the redux-observable docs: https://redux-observable.js.org/docs/recipes/WritingTests.html
+- gist with an example without TestScheduler: https://gist.github.com/evertbouw/d4c6e588c6ffd46febfdee6ac9d33878
+- gist by the same author as above, but with TestScheduler: https://gist.github.com/evertbouw/94d4a9fdce93b34c31614a673acab73f
+
+A recipe from Jay Phelps on StackOverflow on how to debounce with cancellation:
+- https://stackoverflow.com/questions/45513629/debouncing-and-cancelling-with-redux-observable

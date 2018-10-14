@@ -5,7 +5,9 @@ import {
   switchMap,
   mergeMap,
   map,
-  filter
+  filter,
+  takeUntil,
+  repeat
 } from 'rxjs/operators';
 
 import * as api from 'client/services/api';
@@ -13,7 +15,8 @@ import * as api from 'client/services/api';
 import {
   SEARCH_START,
   SEARCH_SUCCESS,
-  SEARCH_ERROR
+  SEARCH_ERROR,
+  SEARCH_CANCEL
 } from 'client/state/constants/search-constants';
 
 export const searchByGeneEpic = action$ => action$.pipe(
@@ -36,7 +39,11 @@ export const searchByGeneEpic = action$ => action$.pipe(
         meta: { searchBy: 'gene' }
       };
     }
-  })
+  }),
+  takeUntil(action$.pipe(
+    ofType(SEARCH_CANCEL)
+  )),
+  repeat()
 );
 
 export const searchByProteinEpic = action$ => action$.pipe(
@@ -47,7 +54,11 @@ export const searchByProteinEpic = action$ => action$.pipe(
   mergeMap(payload =>
     iif(
       () => payload.isValid,
-      api.fetchDataByProteinId(payload),
+      api.fetchDataByProteinId(payload).pipe(
+        takeUntil(action$.pipe(
+          ofType(SEARCH_CANCEL)
+        ))
+      ),
       of({ error: payload.error || `${payload.initialAminoAcid} was not found at position ${payload.position} of ${payload.sequenceId}` })
     )
   ),
@@ -66,5 +77,9 @@ export const searchByProteinEpic = action$ => action$.pipe(
         meta: { searchBy: 'protein' }
       };
     }
-  })
+  }),
+  takeUntil(action$.pipe(
+    ofType(SEARCH_CANCEL)
+  )),
+  repeat()
 );

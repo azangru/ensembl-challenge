@@ -23,7 +23,7 @@ export function updateAminoAcidField(params: UpdateStrategyParams) {
 export function updatePositionField(params: UpdateStrategyParams) {
   const { value, setState, onSetState } = params;
   const position = parseInt(value, 10);
-  if (position) { // this excludes both position == 0 and position == NaN
+  if (!isNaN(position)) {
     setState({ value: position }, () => onSetState(position));
   }
 }

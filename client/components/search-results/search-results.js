@@ -49,14 +49,14 @@ class SearchResults extends PureComponent<Props> {
     if (!this.props.searchByGeneInput) return;
     const { gene, aminoAcid, aminoAcidPosition } = this.props.searchByGeneInput;
 
-    return `Could not find transcripts of the ${gene} gene that encode proteins with ${aminoAcid} at position ${aminoAcidPosition}:`;
+    return `Could not find transcripts of the ${gene} gene that encode proteins with ${aminoAcid} at position ${aminoAcidPosition}`;
   }
 
   getSearchByProteinEmptyMessage() {
     if (!this.props.searchByProteinInput) return;
     const { gene, initialAminoAcid, position } = this.props.searchByProteinInput;
 
-    return `Could not find transcripts of the ${gene} gene that encode proteins with ${initialAminoAcid} at position ${position}:`;
+    return `Could not find transcripts of the ${gene} gene that encode proteins with ${initialAminoAcid} at position ${position}`;
   }
 
   render() {

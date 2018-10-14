@@ -12,13 +12,27 @@ Observables are a powerful abstraction for asynchronous programming and working 
 ## Ramda
 Ramda is a library of utility functions particularly well-suited for functional programming in JavaScript. Its particular strengths are composability of functions and immutability of data (compare, for instance the `merge` function in Ramda and in Lodash: Lodash’s implementation behaves like `Object.assign` and mutates the first object passed to it, while Ramda's implementation is pure and returns a copy of the object without mutating the original).
 
-## Flow
-One of the best practices in modern Frontend development is to use static typing as a first-line defense against bugs, a help during refactoring, and a documentation of data types. The two most common choices are Typescript and Flow, of which I chose Flow due to its familiarity.
-
 ## Stylus
 This was added for convenience purposes. Despite the advances in modern CSS, preprocessors are still easier to write in than vanilla CSS, and Stylus is the most unopinionated of all preprocessors, making semicolons and curly braces optional.
 
 I considered using a CSS-in-JS option, such as styled components, instead of Stylus, but that would have meant adding about 12 KB of minfied gzipped JavaScript to the bundle size, and the benefit seemed minimal.
 
-## Jest
+## Tooling
+
+### Flow
+One of the best practices in modern Frontend development is to use static typing as a first-line defense against bugs, a help during refactoring, and a documentation of data types. The two most common choices are Typescript and Flow, of which I chose Flow due to its familiarity.
+
+### Jest
 Jest combines functionality of a test runner (such as Mocha) and a mocking library (such as Sinon), and has a convenient command-line interface which makes it possible to switch between individual test files in real time.
+
+### Enzyme
+A convenience library for testing React components.
+
+### Eslint
+Added in order to keep code style consistent and to immediately highlight syntax errors.
+
+### Babel
+Added to transpile React’s JSX templates into standard JavaScript, as well as to use the latest features of JavaScript including those convenient ones that have not yet made it into the language spec (such as the object spread operator or class properties).
+
+### Webpack
+Used to build the assets, update their names for every production build, and add links to them in the html template.

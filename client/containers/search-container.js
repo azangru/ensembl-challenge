@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 import {
   searchByGene,
-  searchByProtein
+  searchByProtein,
+  cancelSearch
 } from 'client/state/actions/search-actions';
 
 import SearchResultsContainer from 'client/containers/search-results-container';
@@ -14,7 +15,8 @@ import SearchFields from 'client/components/search-fields';
 
 type Props = {
   searchByGene: Function,
-  searchByProtein: Function
+  searchByProtein: Function,
+  cancelSearch: Function
 }
 
 class SearchContainer extends PureComponent<Props> {
@@ -25,6 +27,7 @@ class SearchContainer extends PureComponent<Props> {
         <SearchFields
           searchByGene={this.props.searchByGene}
           searchByProtein={this.props.searchByProtein}
+          cancelSearch={this.props.cancelSearch}
         />
         <SearchResultsContainer />
       </Fragment>
@@ -34,7 +37,8 @@ class SearchContainer extends PureComponent<Props> {
 
 const mapDispatchToProps = {
   searchByGene,
-  searchByProtein
+  searchByProtein,
+  cancelSearch
 };
 
 export default connect(null, mapDispatchToProps)(SearchContainer);
