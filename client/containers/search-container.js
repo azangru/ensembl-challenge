@@ -19,10 +19,6 @@ type Props = {
 
 class SearchContainer extends PureComponent<Props> {
 
-  componentDidCatch(error) {
-    console.log('error', error);
-  }
-
   render() {
     return (
       <Fragment>

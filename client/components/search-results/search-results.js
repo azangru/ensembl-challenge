@@ -1,7 +1,9 @@
 // @flow
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import Loading from 'client/components/loading';
+
+import './search-results.styl';
 
 import type { State as SearchState } from 'client/state/reducers/search-reducer';
 
@@ -33,45 +35,51 @@ class SearchResults extends PureComponent<Props> {
     if (!this.props.searchByGeneInput) return;
     const { gene, aminoAcid, aminoAcidPosition } = this.props.searchByGeneInput;
 
-    return `Transcripts of ${gene} that encode proteins with ${aminoAcid} at ${aminoAcidPosition}:`;
+    return `Transcripts of the ${gene} gene that encode proteins with ${aminoAcid} at position ${aminoAcidPosition}:`;
   }
 
   getSearchByProteinSuccessMessage() {
     if (!this.props.searchByProteinInput) return;
     const { gene, initialAminoAcid, position } = this.props.searchByProteinInput;
 
-    return `Transcripts of ${gene} that encode proteins with ${initialAminoAcid} at ${position}:`;
+    return `Transcripts of the ${gene} gene that encode proteins with ${initialAminoAcid} at position ${position}:`;
   }
 
   getSearchByGeneEmptyMessage() {
     if (!this.props.searchByGeneInput) return;
     const { gene, aminoAcid, aminoAcidPosition } = this.props.searchByGeneInput;
 
-    return `Could not find transcripts of ${gene} that encode proteins with ${aminoAcid} at ${aminoAcidPosition}:`;
+    return `Could not find transcripts of the ${gene} gene that encode proteins with ${aminoAcid} at position ${aminoAcidPosition}:`;
   }
 
   getSearchByProteinEmptyMessage() {
     if (!this.props.searchByProteinInput) return;
     const { gene, initialAminoAcid, position } = this.props.searchByProteinInput;
 
-    return `Could not find transcripts of ${gene} that encode proteins with ${initialAminoAcid} at ${position}:`;
+    return `Could not find transcripts of the ${gene} gene that encode proteins with ${initialAminoAcid} at position ${position}:`;
   }
 
   render() {
+    let content;
+
     if (this.props.loading) {
-      return (
-        <div className="search-results">
-          <Loading />
-        </div>
-      );
+      content = <Loading />;
+    } else if (this.props.error) {
+      content = this.renderError();
     } else {
-      return (
-        <div className="search-results">
+      content = (
+        <Fragment>
           { this.renderCompletedMessage() }
           { this.renderTranscriptsList() }
-        </div>
+        </Fragment>
       );
     }
+
+    return (
+      <div className="search-results">
+        { content }
+      </div>
+    );
   }
 
   renderCompletedMessage() {
@@ -96,8 +104,15 @@ class SearchResults extends PureComponent<Props> {
       >
         {id}
       </a>
-
     ));
+  }
+
+  renderError() {
+    return (
+      <div className="search-results__error">
+        { this.props.error }
+      </div>
+    );
   }
 
 }

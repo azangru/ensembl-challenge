@@ -53,7 +53,6 @@ export default function searchReducer(state: State = initialState, action: Actio
       return initialState;
 
     case SEARCH_ERROR:
-      console.log('error action', action);
       return {
         ...state,
         error: action.error,

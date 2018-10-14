@@ -21,7 +21,10 @@ export function fetchDataByGeneName(payload) {
     mergeMap(gene =>
       http.get(`/sequence/id/${gene.id}?multiple_sequences=1;type=protein`).pipe(
         map(sequences => ({
-          searchInput: payload,
+          searchInput: {
+            ...payload,
+            gene: gene.display_name || payload.gene
+          },
           transcriptIds: getTranscriptIds({
             ...payload,
             gene,
