@@ -9,7 +9,8 @@
     "build": "NODE_ENV=production webpack --env.mode production --config ./webpack/webpack.config.babel.js",
     "serve-build": "http-server build -p 3000 --gzip",
     "tdd": "NODE_ENV=test jest --watchAll",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +40,7 @@
     "eslint-plugin-jest": "21.24.1",
     "eslint-plugin-react": "7.11.1",
     "flow-bin": "0.82.0",
+    "gh-pages": "2.0.1",
     "html-webpack-plugin": "3.2.0",
     "http-server": "0.11.1",
     "jest": "23.6.0",
