@@ -8,11 +8,11 @@ Here is an outline of my interpretation of the tasks, in terms of precise steps 
 
 2. Use the gene id from the response to request protein sequences of this gene (e.g. for gene BRCA2, which has an id ENSG00000139618, send a request to https://rest.ensembl.org/sequence/id/ENSG00000139618?multiple_sequences=1;type=protein). This will return all protein sequences translated from this gene.
 
-_*Doubt*: not sure whether the response from this endpoint includes (a) all known to Ensembl variants of the protein encoded by different forms of this gene (i.e. by wild-type and various mutant forms of the gene), or (b) different proteins encoded by the same wild-type gene (e.g. due to alternative splicing). But I will proceed as if the answer is (a)._
+    _*Doubt*: not sure whether the response from this endpoint includes (a) all known to Ensembl variants of the protein encoded by different forms of this gene (i.e. by wild-type and various mutant forms of the gene), or (b) different proteins encoded by the same wild-type gene (e.g. due to alternative splicing). But I will proceed as if the answer is (a)._
 
 3. Iterate through the proteins in the response searching for the one with the requested amino acid in the requested position.
 
-_*Note:* geneticists number amino acids in the protein starting with 1 (just to make sure, checked the conventions at http://varnomen.hgvs.org/bg-material/numbering/). Computer scientists famously start counting from 0. This will need to be taken into account when searching for amino acids in the protein sequence._
+    _*Note:* geneticists number amino acids in the protein starting with 1 (just to make sure, checked the conventions at http://varnomen.hgvs.org/bg-material/numbering/). Computer scientists famously start counting from 0. This will need to be taken into account when searching for amino acids in the protein sequence._
 
 4. If such proteins are found, use their ids to select transcripts of this gene that contain the translations with such ids.
 
@@ -29,3 +29,5 @@ _*Doubt*: the phrasing of task 2 is ambiguous: it is possible to understand it a
 3. By using the lookup endpoint, get the stable id of the parent transcript of this protein and then the stable id of the parent gene of this transcript.
 
 4. Proceed as in task 1, starting from section 2.
+
+_*NOTE*: I initially understood this task to mean getting the ids of the transcripts containing the mutation that encodes the amino acid substitution, but it seems that there is no way of getting the mutant variants from the /sequence/id/:id endpoint. So what the code does, is querying for the transcripts that encode protein sequences with the original amino acid in the requested position. For example, request for p.Val600Glu substitution will return transcripts that encode Valine, not Glutamic acid, at position 600 of the protein_
