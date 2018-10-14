@@ -1,15 +1,24 @@
-react
+# Tech Stack
 
-only client-side
+## React
+React was chosen because of how easy it makes to update the DOM in response to changes in the application state. It also encourages breaking the application up into reusable components, which helps with keeping the code modular. Its most notable drawback is the bundle size (around 30 KB of minified gzipped JavaScript), but for an application such as this one it was not an important consideration.
 
-redux
+## Redux
+Although this is a very small application, I wanted to separate React as a presentation layer from the logic for fetching and transforming data. There are several state management libraries intended to keep the app state separate from React, of which Redux is one of the most popular.
 
-ramda
+### Redux-observable
+Observables are a powerful abstraction for asynchronous programming and working with streams of events (and the changing input from a form is a good example of such a stream). Observables make it easy to cancel ongoing requests as soon as the user changes the input, which helps avoid race conditions when sending requests over the network. They are also easily composable and have numerous convenience functions for processing streams of data. Redux-observable is a Redux middleware making it possible to fire up observable streams (using an observable library such as rxjs) in response to particular actions. I have long meant to try observables in action, and this app is a perfect opportunity for doing so.
 
-flow
+## Ramda
+Ramda is a library of utility functions particularly well-suited for functional programming in JavaScript. Its particular strengths are composability of functions and immutability of data (compare, for instance the `merge` function in Ramda and in Lodash: Lodash’s implementation behaves like `Object.assign` and mutates the first object passed to it, while Ramda's implementation is pure and returns a copy of the object without mutating the original).
 
-jest
+## Flow
+One of the best practices in modern Frontend development is to use static typing as a first-line defense against bugs, a help during refactoring, and a documentation of data types. The two most common choices are Typescript and Flow, of which I chose Flow due to its familiarity.
 
-rxjs
+## Stylus
+This was added for convenience purposes. Despite the advances in modern CSS, preprocessors are still easier to write in than vanilla CSS, and Stylus is the most unopinionated of all preprocessors, making semicolons and curly braces optional.
 
-classnames
+I considered using a CSS-in-JS option, such as styled components, instead of Stylus, but that would have meant adding about 12 KB of minfied gzipped JavaScript to the bundle size, and the benefit seemed minimal.
+
+## Jest
+Jest combines functionality of a test runner (such as Mocha) and a mocking library (such as Sinon), and has a convenient command-line interface which makes it possible to switch between individual test files in real time.
